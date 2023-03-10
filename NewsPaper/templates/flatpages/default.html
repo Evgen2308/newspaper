@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>News Portal</title>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
+</head>
+<body>
+<!-- Responsive navbar-->
+<
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">News Portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+<!--                        <span class="sr-only">(current)</span>-->
+                        <!--                        <span class="sr-only">(current)</span>-->
+                    </a>
+                </li>
+                <li class="nav-item">
+@@ -44,6 +44,9 @@
+                <li class="nav-item">
+                    <a class="nav-link" href="/news/3">News 3</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/news/4">News 4</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  9
+NewsPaper/templates/new.html
+@@ -1,11 +1,14 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+<h3>News {{ new.pk }}</h3>
+<h3>{% current_time '%d %b %Y' %}</h3>
+
+<table style="border: 1px solid #afabab;">
+    <tr style="border: 1px solid #afabab;">
+@@ -14,11 +17,11 @@ <h3>News {{ new.pk }}</h3>
+        <td style="border: 1px solid #afabab;">Тип</td>
+        <td style="border: 1px solid #afabab;">Текст</td>
+    </tr>
+    <tr style="border: 1px solid #10be10;">
+        <td style="border: 1px solid #afabab;">{{ new.post_title }}</td>
+    <tr style="border: 1px solid #afabab;">
+        <td style="border: 1px solid #afabab;">{{ new.post_title|censor }}</td>
+        <td style="border: 1px solid #afabab;">{{ new.date_creation }}</td>
+        <td style="border: 1px solid #afabab;">{{ new.post_type }}</td>
+        <td style="border: 1px solid #afabab;">{{ new.post_text }}</td>
+        <td style="border: 1px solid #afabab;">{{ new.post_text|censor }}</td>
+    </tr>
+</table>
+{% endblock content %}
