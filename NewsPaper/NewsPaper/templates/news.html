@@ -1,0 +1,59 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+   <h1>Все новости или статьи (общее количество: {{ news|length }})</h1>
+   <h3>{{ time_now|date:'d M Y' }}</h3>
+   <h3> {{ next_sale|default_if_none:"Портал в стадии разработки!" }} </h3>
+   <hr>
+   {% if news %}
+       <table style="border: 1px solid #afabab;">
+           <tr style="border: 1px solid #afabab;">
+               <td style="border: 1px solid #afabab;">Заголовок</td>
+               <td style="border: 1px solid #afabab;">Дата публикации</td>
+               <td style="border: 1px solid #afabab;">Тип</td>
+               <td style="border: 1px solid #afabab;">Текст</td>
+           </tr>
+           {% for new in news %}
+           <tr style="border: 1px solid #10be10;">
+               <td style="border: 1px solid #afabab;">{{ new.post_title }}</td>
+               <td style="border: 1px solid #afabab;">{{ new.date_creation }}</td>
+               <td style="border: 1px solid #afabab;">{{ new.post_type }}</td>
+               <td style="border: 1px solid #afabab;">{{ new.post_text|truncatewords:20 }}</td>
+           </tr>
+           {% endfor %}
+       </table>
+   {% else %}
+       <h2>Новостей или статей нет!</h2>
+   {% endif %}
+{% endblock content %}
+<h1>Все новости или статьи (общее количество: {{ news|length }})</h1>
+<h3>{% current_time '%d %b %Y' %}</h3>
+<h3> {{ next_sale|default_if_none:"Портал в стадии разработки!" }} </h3>
+<hr>
+{% if news %}
+<table style="border: 1px solid #afabab;">
+    <tr style="border: 1px solid #afabab;">
+        <td style="border: 1px solid #afabab;">Заголовок</td>
+        <td style="border: 1px solid #afabab;">Дата публикации</td>
+        <td style="border: 1px solid #afabab;">Тип</td>
+        <td style="border: 1px solid #afabab;">Текст</td>
+    </tr>
+    {% for new in news %}
+    <tr style="border: 1px solid #afabab;">
+        <td style="border: 1px solid #afabab;">{{ new.post_title|censor }}</td>
+        <td style="border: 1px solid #afabab;">{{ new.date_creation }}</td>
+        <td style="border: 1px solid #afabab;">{{ new.post_type }}</td>
+        <td style="border: 1px solid #afabab;">{{ new.post_text|truncatewords:20|censor }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h2>Новостей или статей нет!</h2>
+{% endif %}
+{% endblock content %}
